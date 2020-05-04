@@ -26,6 +26,16 @@ namespace EmployeeManagement.Models
             return employee;
         }
 
+        public Employee Delete(int id)
+        {
+            Employee emp = _employeeList.FirstOrDefault(e => e.Id == id);
+            if (emp != null)
+            {
+                _employeeList.Remove(emp);
+            }
+            return emp;
+        }
+
         public IEnumerable<Employee> GetAllEmployee()
         {
             return _employeeList;
@@ -38,6 +48,18 @@ namespace EmployeeManagement.Models
             //          select Employee;
             //return emp.FirstOrDefault();
             return _employeeList.FirstOrDefault(emp => emp.Id == id);
+        }
+
+        public Employee Update(Employee employeeChanges)
+        {
+            Employee emp = _employeeList.FirstOrDefault(e => e.Id == employeeChanges.Id);
+            if (emp != null)
+            {
+                emp.Name = employeeChanges.Name;
+                emp.Email = employeeChanges.Email;
+                emp.Department = employeeChanges.Department;
+            }
+            return emp;
         }
     } 
 }
